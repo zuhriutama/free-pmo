@@ -8,4 +8,6 @@ return [
     'yearly_earnings'                  => 'Pendapatan Tahunan',
     'finished_projects_count'          => 'Project Selesai',
     'receiveable_earnings'             => 'Pendapatan akan Datang',
+    'upcoming_calendar_events'         => 'Agenda Kegiatan Terdekat',
+    'no_upcoming_calendar_events'         => 'Tidak Ada Agenda Kegiatan dalam 7 hari ke depan.',
 ];

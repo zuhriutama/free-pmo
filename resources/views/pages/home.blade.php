@@ -75,12 +75,35 @@
                     <td>{{ $subscription->customer->name }}</td>
                     <td class="text-right">{{ formatRp($subscription->price) }}</td>
                     <td class="text-center">
-                        {{ $subscription->due_date }}
+                        {{ formatDate($subscription->due_date) }}
                         {!! $subscription->nearOfDueDateSign() !!}
                     </td>
                 </tr>
                 @empty
                 <tr><td colspan="4">{{ trans('dashboard.no_upcoming_subscriptions_expiry') }}</td></tr>
+                @endforelse
+            </table>
+        </div>
+
+        <legend style="border-bottom: none" class="text-center">{{ trans('dashboard.upcoming_calendar_events') }}</legend>
+
+        <div class="panel panel-default table-responsive">
+            <table class="table table-condensed">
+                <tr>
+                    <th class="col-xs-3 text-center">@lang('event.date')</th>
+                    <th class="col-xs-3">@lang('event.title')</th>
+                    <th class="col-xs-3">@lang('event.body')</th>
+                    <th class="col-xs-5">@lang('project.project')</th>
+                </tr>
+                @forelse(AdminDashboard::upcomingCalendarEvents() as $event)
+                <tr>
+                    <td class="text-center">{{ formatDateTime($event->start) }}</td>
+                    <td>{{ $event->title }}</td>
+                    <td>{{ $event->body }}</td>
+                    <td>{{ $event->project->name }}</td>
+                </tr>
+                @empty
+                <tr><td colspan="4">{{ trans('dashboard.no_upcoming_calendar_events') }}</td></tr>
                 @endforelse
             </table>
         </div>

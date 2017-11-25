@@ -204,6 +204,13 @@ function dateDifference($date1, $date2, $differenceFormat = '%a')
     return $interval->format($differenceFormat);
 }
 
+function formatDateTime($dateTime, $dateFormat="d M Y H:i")
+{
+    $datetime = date_create($dateTime);
+
+    return $datetime->format($dateFormat);
+}
+
 function appLogoImage($attributes = [])
 {
     return Html::image(

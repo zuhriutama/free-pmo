@@ -6,6 +6,7 @@ use App\Entities\Payments\Payment;
 use App\Entities\Projects\Job;
 use App\Entities\Projects\Project;
 use App\Entities\Subscriptions\Subscription;
+use App\Entities\Users\Event;
 use Carbon\Carbon;
 
 /**
@@ -104,5 +105,21 @@ class AdminDashboardQuery
                 return $query->whereIn('status_id', [2, 3]);
             })
             ->count();
+    }
+
+    /**
+     * Get list of upcoming calendar events
+     *
+     * @return \Illuminate\Support\Collection Collection of filtered subscriptions
+     */
+    public function upcomingCalendarEvents()
+    {
+        $events = Event::orderBy('start', 'asc')->get();
+
+        $filteredEvents = $events->filter(function ($event) {
+            return Carbon::parse($event->start)->diffInDays(Carbon::now()) < 7;
+        });
+
+        return $filteredEvents->load('project');
     }
 }
