@@ -99,10 +99,15 @@ class AdminDashboardQuery
     public function onProgressJobCount()
     {
         return Job::whereHas('tasks', function ($query) {
-            return $query->where('progress', '<', 100);
-        })
+                return $query->where('progress', '<', 100);
+            })
             ->whereHas('project', function ($query) {
                 return $query->whereIn('status_id', [2, 3]);
+            })
+            ->where(function ($query) {
+                if(!auth()->user()->hasRole('admin')){
+                    $query->where('worker_id',auth()->user()->id);
+                }
             })
             ->count();
     }

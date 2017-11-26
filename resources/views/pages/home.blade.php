@@ -100,7 +100,7 @@
                     <td class="text-center">{{ formatDateTime($event->start) }}</td>
                     <td>{{ $event->title }}</td>
                     <td>{{ $event->body }}</td>
-                    <td>{{ $event->project->name }}</td>
+                    <td>{{ $event->project->name or '-'}}</td>
                 </tr>
                 @empty
                 <tr><td colspan="4">{{ trans('dashboard.no_upcoming_calendar_events') }}</td></tr>

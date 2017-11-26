@@ -14,7 +14,7 @@ class UpdateRequest extends Request
      */
     public function authorize()
     {
-        return auth()->user()->can('manage_agency');
+        return auth()->user()->can('manage_jobs');
     }
 
     /**

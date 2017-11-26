@@ -37,8 +37,8 @@ class AuthServiceProvider extends ServiceProvider
             });
         }
 
-        Gate::define('manage_jobs', function ($user, $project) {
-            return true;
+        Gate::define('manage_jobs', function ($user) {
+            return $user->hasRole('worker');
         });
     }
 

@@ -41,7 +41,6 @@ Route::group(['middleware' => ['web', 'role:admin'], 'namespace' => 'Projects'],
      */
     Route::get('jobs/{id}/tasks/create', ['as' => 'tasks.create', 'uses' => 'TasksController@create']);
     Route::post('jobs/{id}/tasks', ['as' => 'tasks.store', 'uses' => 'TasksController@store']);
-    Route::patch('task/{id}', ['as' => 'tasks.update', 'uses' => 'TasksController@update']);
     Route::delete('task/{id}', ['as' => 'tasks.destroy', 'uses' => 'TasksController@destroy']);
 
     /**
@@ -60,6 +59,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
      */
     Route::get('jobs', ['as' => 'jobs.index', 'uses' => 'JobsController@index']);
     Route::get('jobs/{job}', ['as' => 'jobs.show', 'uses' => 'JobsController@show']);
+    Route::patch('task/{id}', ['as' => 'tasks.update', 'uses' => 'Projects\TasksController@update']);
 });
 
 Route::group(['middleware' => ['web', 'role:admin']], function () {

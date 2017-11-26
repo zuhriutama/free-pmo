@@ -28,6 +28,11 @@ class JobsRepository extends BaseRepository
             ->whereHas('project', function ($query) {
                 return $query->whereIn('status_id', [2, 3]);
             })
+            ->where(function ($query){
+                if(!auth()->user()->hasRole('admin')){
+                    return $query->where('worker_id',auth()->user()->id);
+                }
+            })
             ->with(['tasks', 'project'])
             ->get();
     }
